@@ -71,12 +71,12 @@ class Search(object):
 
     endMessage = (
         "\n\n_____\n\n"
-        "|[^([FAQs])](http://www.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)"
-        "|[^([Custom])](http://www.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message="
+        "|[^([FAQs])](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)"
+        "|[^([Custom])](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message="
             "[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0A"
             "NOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)"
-        "|[^([Your Reminders])](http://www.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)"
-        "|[^([Feedback])](http://www.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)"
+        "|[^([Your Reminders])](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)"
+        "|[^([Feedback])](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)"
         "|[^([Code])](https://github.com/SIlver--/remindmebot-reddit)"
         "\n|-|-|-|-|-|"
         )
@@ -115,10 +115,10 @@ class Search(object):
                 try:
                     urllib.urlopen(self.comment.permalink)
                 except IOError:
-                    self.comment.permalink = "http://www.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/"
+                    self.comment.permalink = "http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/"
             else:
                 # Defaults when the user doesn't provide a link
-                self.comment.permalink = "http://www.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/"
+                self.comment.permalink = "http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/"
 
         # remove RemindMe! or !RemindMe (case insenstive)
         match = re.search(r'(?i)(!*)RemindMe(!*)', self.comment.body)
@@ -180,10 +180,10 @@ class Search(object):
             print "link had http"
         if self._privateMessage == False and self.sub.id not in self.subId:
             remindMeMessage = (
-                "\n\n[**CLICK THIS LINK**](http://www.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message="
+                "\n\n[**CLICK THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message="
                 "[{permalink}]%0A%0ARemindMe! {time}) to send a PM to also be reminded and to reduce spam."
                 "\n\n^(Parent commenter can ) [^(delete this message to hide from others.)]"
-                "(http://www.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! ____id____)").format(
+                "(http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! ____id____)").format(
                     permalink=permalink,
                     time=self._storeTime.replace('\n', '')
                 )
@@ -285,7 +285,7 @@ def grab_list_of_reminders(username):
     data = database.cursor.fetchall()
     table = (
             "[**Click here to delete all your reminders at once quickly.**]"
-            "(http://www.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=RemoveAll!)\n\n"
+            "(http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=RemoveAll!)\n\n"
             "|Permalink|Message|Date|Remove|\n"
             "|-|-|-|:-:|")
     for row in data:
@@ -293,7 +293,7 @@ def grab_list_of_reminders(username):
         table += (
             "\n|" + row[0] + "|" +   row[1] + "|" + 
             "[" + date  +"](http://www.wolframalpha.com/input/?i=" + str(row[2]) + ")|"
-            "[[X]](https://www.reddit.com/message/compose/?to=RemindMeBot&subject=Remove&message=Remove!%20"+ str(row[3]) + ")|"
+            "[[X]](https://np.reddit.com/message/compose/?to=RemindMeBot&subject=Remove&message=Remove!%20"+ str(row[3]) + ")|"
             )
     if len(data) == 0: 
         table = "Looks like you have no reminders. Click the **[Custom]** button below to make one!"
